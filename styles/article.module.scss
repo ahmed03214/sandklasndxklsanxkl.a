@@ -1,0 +1,94 @@
+@mixin cutlines($lines) {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+$secound-color: #3dbee6;
+$main-color: #b84a85;
+
+.article {
+  .header {
+    .back {
+      font-size: 1rem;
+    }
+
+    .lineOfBody {
+      @include cutlines(1);
+      font-weight: 550;
+    }
+
+    .date {
+      color: $secound-color;
+    }
+  }
+
+  main {
+    .body {
+      background-color: #fff;
+
+      .img {
+        max-height: 350px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .hash {
+        text-align: center;
+        color: #fff;
+        width: fit-content;
+      }
+    }
+
+    .shareBox ul {
+      background-color: rgba($color: $main-color, $alpha: 0.5);
+
+      li {
+        color: $main-color;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.articleThumbnail {
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 12px;
+  margin: auto;
+  max-width: 350px;
+  height: 100%;
+
+  .img {
+    max-height: 300px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .hash {
+      text-align: center;
+      width: fit-content;
+    }
+  }
+
+  footer {
+    .desc {
+      @include cutlines(3);
+      overflow: hidden;
+    }
+
+    .date {
+      color: $secound-color;
+    }
+  }
+}

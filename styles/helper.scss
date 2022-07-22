@@ -1,0 +1,112 @@
+.light-font {
+  font-weight: 200;
+}
+
+.cu-pointer {
+  cursor: pointer;
+}
+
+.cu-grab {
+  cursor: grab;
+}
+
+.cu-default {
+  cursor: default;
+}
+
+.event-none {
+  pointer-events: none;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.small {
+  font-size: 0.8rem !important;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.select-none {
+  user-select: none;
+}
+
+.postion-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.postion-bottom {
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+}
+
+.offset-top {
+  margin-top: 70px;
+}
+
+.text-cut {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.w-95 {
+  width: 95%;
+}
+
+.w-md-75 {
+  @media (min-width: 767px) {
+    width: 75% !important;
+  }
+}
+
+.w-md-auto {
+  @media (min-width: 767px) {
+    width: auto !important;
+  }
+}
+
+.back-index {
+  z-index: -1;
+}
+
+.bg-lighter {
+  background-color: #fff;
+}
+
+// Min height
+@for $i from 1 through 100 {
+  .min-h-#{$i}vh {
+    min-height: #{$i}vh;
+  }
+}

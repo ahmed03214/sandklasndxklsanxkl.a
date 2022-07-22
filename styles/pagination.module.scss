@@ -1,0 +1,24 @@
+.pagination {
+  .item {
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;
+    transition: 0.4s;
+
+    &:hover:not(.active) {
+      background-color: rgb(240, 240, 240);
+    }
+
+    &.active {
+      background-color: #b84a85;
+      border: 1px solid #5454d4;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    &[disabled] {
+      pointer-events: none;
+      color: #6c757d;
+    }
+  }
+}
