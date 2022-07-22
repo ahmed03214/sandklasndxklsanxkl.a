@@ -85,13 +85,11 @@ const Header = ({ showMobmenu, adminData }) => {
           </NavItem>
         </Nav>
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-          <DropdownToggle color="primary">
+          <DropdownToggle color="primary" className="px-0 px-md-3">
             <div
               className="d-flex justify-conent-cnter align-items-center gap-2"
               style={{ lineHeight: "0px" }}
             >
-              <p className="m-0">@{adminData.name}</p>
-
               <Image
                 src={mainAvatar}
                 alt="profile"
@@ -99,6 +97,8 @@ const Header = ({ showMobmenu, adminData }) => {
                 width="30"
                 height="30"
               />
+
+              <p className="m-0">@{adminData.name}</p>
             </div>
           </DropdownToggle>
           <DropdownMenu>

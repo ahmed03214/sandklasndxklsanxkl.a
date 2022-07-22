@@ -30,8 +30,6 @@ const schema = yup.object({
 });
 
 const Social = ({ auth, social }) => {
-  console.log(social);
-
   const {
     handleSubmit,
     register,
