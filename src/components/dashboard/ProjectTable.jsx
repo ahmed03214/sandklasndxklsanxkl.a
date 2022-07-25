@@ -73,13 +73,15 @@ const ProjectTables = ({ admins, setAdminsData }) => {
                 <tr key={idx} className="border-top">
                   <td>
                     <div className="d-flex align-items-center p-2">
-                      <Image
-                        src={getAvatarByOrder()}
-                        className="rounded-circle"
-                        alt="avatar"
-                        width="45"
-                        height="45"
-                      />
+                      <div style={{ minWidth: "45px" }} className="img">
+                        <Image
+                          src={getAvatarByOrder()}
+                          className="rounded-circle"
+                          alt="avatar"
+                          width="45"
+                          height="45"
+                        />
+                      </div>
                       <div className="ms-3">
                         <h6 className="mb-0">{admin.name}</h6>
                         <span className="text-muted">{admin.email}</span>
