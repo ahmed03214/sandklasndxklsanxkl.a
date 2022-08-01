@@ -33,6 +33,24 @@ const EditService = ({ auth, serviceData }) => {
       data.hide = "0";
     }
 
+    const getDataWithoutNewLine = () => {
+      // get current values
+      const itemsKeys = Object.keys(serviceData).filter((key) =>
+        serviceData[key]?.includes("|||")
+      );
+
+      const cuurentData = itemsKeys.map((key) => ({ [key]: data[key] }));
+
+      cuurentData.forEach((item) => {
+        const key = Object.keys(item)[0];
+        const value = item[key].replaceAll("\n", "|||");
+
+        data[key] = value.includes("|||") ? value : `${value}|||`;
+      });
+    };
+
+    getDataWithoutNewLine();
+
     Services.update({
       data,
       cb: (message) => {
@@ -52,33 +70,35 @@ const EditService = ({ auth, serviceData }) => {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
             {Object.keys(serviceData).map((key, idx) =>
-              key === "id" ? (
+              key === "id" || key === "hide" ? (
                 ""
-              ) : key === "hide" ? (
-                <FormGroup key={idx}>
-                  <div className="form-check form-switch d-block mt-2">
-                    <input
-                      {...register(key)}
-                      className="form-check-input"
-                      type="checkbox"
-                      id="flexSwitchCheckDefault"
-                      defaultChecked={+serviceData[key] ? true : false}
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexSwitchCheckDefault"
-                    >
-                      {key}
-                    </label>
-                  </div>
-                </FormGroup>
-              ) : (
+              ) : serviceData[key]?.includes("|||") ? (
                 <Col key={idx} md={6}>
                   <FormGroup>
-                    <Label for="email">{key}</Label>
-                    <input
+                    <Label for={key}>{key}</Label>
+                    <textarea
+                      style={{ minHeight: "100px", resize: "none" }}
                       {...register(key, {
-                        value: serviceData[key],
+                        value: serviceData[key].replaceAll("|||", "\n"),
+                        required: {
+                          message: "please fill all inputs",
+                          value: true,
+                        },
+                      })}
+                      placeholder="type your change"
+                      className="form-control"
+                    />
+                  </FormGroup>
+                </Col>
+              ) : key.startsWith("des") ? (
+                <Col key={idx} md={6}>
+                  <FormGroup>
+                    <Label for={key}>{key}</Label>
+                    <textarea
+                      onKeyDown={(e) => e.keyCode == 13 && e.preventDefault()}
+                      style={{ minHeight: "100px", resize: "none" }}
+                      {...register(key, {
+                        value: serviceData[key].replaceAll("|||", "\n"),
                         required: {
                           message: "please fill all inputs",
                           value: true,
@@ -90,8 +110,46 @@ const EditService = ({ auth, serviceData }) => {
                     />
                   </FormGroup>
                 </Col>
+              ) : (
+                <Col key={idx} md={6}>
+                  <FormGroup>
+                    <Label for={key}>{key}</Label>
+                    <input
+                      {...register(key, {
+                        value: serviceData[key],
+                        required: {
+                          message: "please fill all inputs",
+                          value: true,
+                        },
+                      })}
+                      placeholder="type your change"
+                      type="text"
+                      className="form-control"
+                      id={key}
+                    />
+                  </FormGroup>
+                </Col>
               )
             )}
+
+            {/* // Hideen toggel in end page */}
+            <FormGroup>
+              <div className="form-check form-switch d-block mt-2">
+                <input
+                  {...register("hide")}
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckDefault"
+                  defaultChecked={+serviceData["hide"] ? true : false}
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor="flexSwitchCheckDefault"
+                >
+                  hide
+                </label>
+              </div>
+            </FormGroup>
           </Row>
 
           {/* First error message */}
