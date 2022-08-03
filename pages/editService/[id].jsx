@@ -72,6 +72,26 @@ const EditService = ({ auth, serviceData }) => {
             {Object.keys(serviceData).map((key, idx) =>
               key === "id" || key === "hide" ? (
                 ""
+              ) : // Removed Data
+              serviceData[key] === "    " || serviceData[key] === "    |||" ? (
+                <Col hidden key={idx} md={6}>
+                  <FormGroup>
+                    <Label for={key}>{key}</Label>
+                    <input
+                      {...register(key, {
+                        value: serviceData[key],
+                        required: {
+                          message: "please fill all inputs",
+                          value: true,
+                        },
+                      })}
+                      placeholder="type your change"
+                      type="text"
+                      className="form-control"
+                      id={key}
+                    />
+                  </FormGroup>
+                </Col>
               ) : serviceData[key]?.includes("|||") ? (
                 <Col key={idx} md={6}>
                   <FormGroup>
